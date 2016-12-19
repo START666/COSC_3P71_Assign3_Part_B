@@ -8,7 +8,7 @@ public class PSO {
 
     private int particleNum;
     private int MAX_GEN;
-    private ArrayList<Particle1D> particle1DList;
+    private ArrayList<Particle> particleList;
     private double gBestX,gBestFitness;
 
     public PSO(int particleNum,int MAX_GEN){
@@ -18,30 +18,30 @@ public class PSO {
     }
 
     public void solve(){
-        particle1DList = new ArrayList<Particle1D>();
+        particleList = new ArrayList<Particle>();
         //init particles randomly
         Random random = new Random();
         for(int i=0;i<particleNum;i++){
-            Particle1D p = new Particle1D(random.nextDouble());
-            particle1DList.add(p);
+            Particle p = new Particle(random.nextDouble());
+            particleList.add(p);
         }
 
         for(int i=0;i<MAX_GEN;i++){
-            for(Particle1D p : particle1DList){
+            for(Particle p : particleList){
                 p.evaluate();
                 p.updatePBest();
             }
 
             //update gBest
-            for(Particle1D p : particle1DList){
+            for(Particle p : particleList){
                 if(p.fitness<gBestFitness){
                     gBestFitness = p.fitness;
                     gBestX = p.x;
                 }
             }
 
-            for(Particle1D p : particle1DList){
-                updateVelocity1D(p);
+            for(Particle p : particleList){
+                updateVelocity(p);
                 p.x += p.v.getSpeed();  //update position
             }
         }
@@ -49,7 +49,7 @@ public class PSO {
         System.out.println("Best location: x = "+ String.format("%.5f", gBestX));
     }
 
-    private void updateVelocity1D(Particle1D p){
+    private void updateVelocity(Particle p){
         //inertia term
         double w = 0.8;
         double iv = p.v.getSpeed() * w;

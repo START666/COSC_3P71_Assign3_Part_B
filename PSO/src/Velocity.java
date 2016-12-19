@@ -1,10 +1,10 @@
 /**
  * Created by Xuhao Chen on 2016/12/19.
  */
-public class Velocity1D {
+public class Velocity {
     private int x;  //direction
     private double value;
-    public Velocity1D(int x,double value){
+    public Velocity(int x, double value){
         setX(x);
         this.value = value;
     }

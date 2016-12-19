@@ -1,19 +1,19 @@
 /**
  * Created by Xuhao Chen on 2016/12/19.
  */
-public class Particle1D {
+public class Particle {
 
     public double x;
-    public Velocity1D v;
+    public Velocity v;
     public double fitness;
     public double pBestX, pBestFitness;
 
-    public Particle1D(double x){
+    public Particle(double x){
         this.fitness = Double.MAX_VALUE;
         this.x = x;
         this.pBestX = x;
         this.pBestFitness = Double.MAX_VALUE;
-        this.v = new Velocity1D(0,0);  //initial velocity is 0
+        this.v = new Velocity(0,0);  //initial velocity is 0
     }
 
     public void evaluate(){
@@ -35,9 +35,9 @@ public class Particle1D {
     }
 
     public void setVelocity(int x, double value){
-        this.v = new Velocity1D(x,value);
+        this.v = new Velocity(x,value);
     }
-    public void setVelocity(Velocity1D v){
+    public void setVelocity(Velocity v){
         setVelocity(v.getX(),v.getValue());
     }
 }
